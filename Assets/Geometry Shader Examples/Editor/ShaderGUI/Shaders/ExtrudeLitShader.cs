@@ -25,8 +25,7 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
             if (material == null)
                 throw new ArgumentNullException("material");
 
-            SetMaterialKeywords(material, LitGUI.SetMaterialKeywords);
-            SetMaterialKeywords(material, ExtrudeGUI.SetMaterialKeywords);
+            SetMaterialKeywords(material, LitGUI.SetMaterialKeywords, ExtrudeGUI.SetMaterialKeywords);
         }
 
         // material main surface options

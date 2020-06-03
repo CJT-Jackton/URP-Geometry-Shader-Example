@@ -25,8 +25,7 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
             if (material == null)
                 throw new ArgumentNullException("material");
 
-            SetMaterialKeywords(material, LitGUI.SetMaterialKeywords);
-            SetMaterialKeywords(material, TessellationGUI.SetMaterialKeywords);
+            SetMaterialKeywords(material, LitGUI.SetMaterialKeywords, TessellationGUI.SetMaterialKeywords);
         }
 
         // material main surface options
