@@ -7,8 +7,8 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
     {
         public enum TessellationMode
         {
-            None,
-            Phong
+            None = 0,
+            Phong = 1
         }
 
         public static class Styles
@@ -30,6 +30,8 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
 
             public static GUIContent tessellationShapeFactorText = new GUIContent("Shape Factor",
                 "Controls the strength of Phong tessellation shape (lerp factor).");
+
+            public static readonly string[] tessellationModeNames = { "None", "Phong" };
         }
 
         public struct TessellationProperties
@@ -43,7 +45,7 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
 
             public TessellationProperties(MaterialProperty[] properties)
             {
-                tessellationMode = BaseShaderGUI.FindProperty("_TessellationMode", properties, false);
+                tessellationMode = BaseShaderGUI.FindProperty("_TessellationMode", properties);
                 tessellationFactor = BaseShaderGUI.FindProperty("_TessellationFactor", properties, false);
                 tessellationFactorMinDistance = BaseShaderGUI.FindProperty("_TessellationFactorMinDistance", properties, false);
                 tessellationFactorMaxDistance = BaseShaderGUI.FindProperty("_TessellationFactorMaxDistance", properties, false);
@@ -54,12 +56,31 @@ namespace UnityEditor.Rendering.Universal.ShaderGUI
 
         public static void DoTessellation(TessellationProperties properties, MaterialEditor materialEditor)
         {
-            materialEditor.ShaderProperty(properties.tessellationMode, Styles.tessellationModeText);
+            EditorGUI.BeginChangeCheck();
+            var tessmode = (int)properties.tessellationMode.floatValue;
+            tessmode = EditorGUILayout.Popup(Styles.tessellationModeText, tessmode, Styles.tessellationModeNames);
+            if (EditorGUI.EndChangeCheck())
+                properties.tessellationMode.floatValue = tessmode;
+
             EditorGUI.indentLevel++;
             materialEditor.ShaderProperty(properties.tessellationFactor, Styles.tessellationFactorText);
-            materialEditor.ShaderProperty(properties.tessellationFactorMinDistance, Styles.tessellationFactorMinDistanceText);
-            materialEditor.ShaderProperty(properties.tessellationFactorMaxDistance, Styles.tessellationFactorMaxDistanceText);
-            materialEditor.ShaderProperty(properties.tessellationFactorTriangleSize, Styles.tessellationFactorTriangleSizeText);
+
+            EditorGUI.BeginChangeCheck();
+            var minDist = properties.tessellationFactorMinDistance.floatValue;
+            var maxDist = properties.tessellationFactorMaxDistance.floatValue;
+            var triSize = properties.tessellationFactorTriangleSize.floatValue;
+
+            minDist = EditorGUILayout.FloatField(Styles.tessellationFactorMinDistanceText, minDist, GUILayout.ExpandWidth(false));
+            maxDist = EditorGUILayout.FloatField(Styles.tessellationFactorMaxDistanceText, maxDist, GUILayout.ExpandWidth(false));
+            triSize = EditorGUILayout.FloatField(Styles.tessellationFactorTriangleSizeText, triSize, GUILayout.ExpandWidth(false));
+
+            if (EditorGUI.EndChangeCheck())
+            {
+                properties.tessellationFactorMinDistance.floatValue = minDist;
+                properties.tessellationFactorMaxDistance.floatValue = maxDist;
+                properties.tessellationFactorTriangleSize.floatValue = triSize;
+            }
+
             materialEditor.ShaderProperty(properties.tessellationShapeFactor, Styles.tessellationShapeFactorText);
             EditorGUI.indentLevel--;
         }
