@@ -15,6 +15,9 @@ Some examples of how can you use geometry shader in Unity URP.
 ![](/Images/screenshots-wireframe-lit.png)
 > Wireframe Lit Shader
 
+![](/Images/screenshots-wireframe-styled-unlit.png)
+> Wireframe Styled Unlit Shader
+
 ![](/Images/screenshots-tessellation-lit.png)
 > Tessellation Lit Shader
 
