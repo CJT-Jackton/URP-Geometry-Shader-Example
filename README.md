@@ -15,6 +15,9 @@ Some examples of how can you use geometry shader in Unity URP.
 ![](/Images/screenshots-wireframe-lit.png)
 > Wireframe Lit Shader
 
+![](/Images/screenshots-tessellation-lit.png)
+> Tessellation Lit Shader
+
 ## Resources
 - Model - [Battle Damaged Sci-fi Helmet - PBR](https://github.com/KhronosGroup/glTF-Sample-Models/tree/master/2.0/DamagedHelmet) by [Leonardo Carrion](https://sketchfab.com/theblueturtle_)
 - Model - [Cutting Board 003](https://www.poliigon.com/model/cutting-board-003) by [Poliigon](https://www.poliigon.com/)
