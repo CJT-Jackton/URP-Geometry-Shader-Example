@@ -169,8 +169,7 @@
             #pragma vertex ShadowPassVertex
             #pragma fragment ShadowPassFragment
 
-            #include "WireframeCommon.hlsl"
-            #include "WireframeLitInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/ShadowCasterPass.hlsl"
             ENDHLSL
         }
@@ -202,8 +201,7 @@
             // GPU Instancing
             #pragma multi_compile_instancing
 
-            #include "WireframeCommon.hlsl"
-            #include "WireframeLitInput.hlsl"
+            #include "Packages/com.unity.render-pipelines.universal/Shaders/LitInput.hlsl"
             #include "Packages/com.unity.render-pipelines.universal/Shaders/DepthOnlyPass.hlsl"
             ENDHLSL
         }
